@@ -11,19 +11,19 @@ import PersonInfoScreen from './RersonInfoScreen.vue'
     <div
       class="main-screen__screen"
       :class="{
-        'main-screen__screen--flex': !this.personOnScreen,
+        'main-screen__screen--flex': isFlex,
         'main-screen__screen--white': isWhite,
         'main-screen__screen--blur': isLoading
       }"
     >
-      <div v-if="!this.personOnScreen">Выберите сотрудника, чтобы посмотреть его профиль</div>
+      <div v-if="!personOnScreen">Выберите сотрудника, чтобы посмотреть его профиль</div>
       <PersonInfoScreen
         v-if="personOnScreen?.name"
-        :name="this.personOnScreen.name"
-        :mail="this.personOnScreen.email"
-        :alt="this.personOnScreen.name"
-        :phone="this.personOnScreen.phone"
-        :about="this.personOnScreen.company.catchPhrase"
+        :name="personOnScreen.name"
+        :mail="personOnScreen.email"
+        :alt="personOnScreen.name"
+        :phone="personOnScreen.phone"
+        :about="personOnScreen.company.catchPhrase"
       />
       <Loader v-if="isLoading" />
     </div>
@@ -31,25 +31,21 @@ import PersonInfoScreen from './RersonInfoScreen.vue'
 </template>
 
 <script>
-import { useStore } from 'vuex'
-import { computed } from 'vue'
 import axios from 'axios'
 import Loader from './Loader.vue'
 export default {
   components: { Loader },
-  setup() {
-    const store = useStore()
-    const persons = computed(() => store.state.persons)
-
-    return {
-      persons
-    }
-  },
   data() {
     return {
       personOnScreen: null,
       isWhite: true,
-      isLoading: false
+      isLoading: false,
+      isFlex: true
+    }
+  },
+  computed: {
+    persons() {
+      return this.$store.getters.getPersons
     }
   },
   methods: {
@@ -57,6 +53,7 @@ export default {
       axios
         .get(`https://jsonplaceholder.typicode.com/users/${id}`)
         .then((res) => (this.personOnScreen = { ...res.data }))
+        .then(() => (this.isFlex = false))
         .then(() => (this.isLoading = false))
     },
     showPerson(person) {
@@ -65,9 +62,11 @@ export default {
     },
     hide() {
       this.personOnScreen = null
+      this.isFlex = true
     },
     isSearching() {
       this.isWhite = false
+      this.isFlex = true
     }
   }
 }

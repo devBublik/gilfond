@@ -10,10 +10,10 @@ import PersonCard from './PersonCard.vue'
       <CustomInput placeholder="Введите Id или имя " @on-change="onChange" />
     </div>
     <h3 class="sidebar__title">Результаты</h3>
-    <div v-if="!this.results.length && !this.filter.length">Начните поиск</div>
-    <div v-if="!this.results.length && this.filter.length">Ничего не найдено</div>
+    <div v-if="!results.length && !filter.length">Начните поиск</div>
+    <div v-if="!results.length && filter.length">Ничего не найдено</div>
     <PersonCard
-      v-for="person in this.results"
+      v-for="person in results"
       :key="person.id"
       :name="person.name"
       :mail="person.mail"
@@ -24,8 +24,7 @@ import PersonCard from './PersonCard.vue'
 </template>
 
 <script>
-import { mapMutations, useStore } from 'vuex'
-import { computed } from 'vue'
+import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
@@ -36,13 +35,6 @@ export default {
   computed: {
     persons() {
       return this.$store.getters.getPersons
-    }
-  },
-  setup() {
-    const store = useStore()
-
-    return {
-      getPersons: computed(() => store.getters['getPersons'])
     }
   },
   methods: {
