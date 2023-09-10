@@ -2,7 +2,7 @@
 
 ## Deploy
 
-See [Deploy](https://gilfond-devbublik.netlify.app/).
+Деплой - [https://gilfond-devbublik.netlify.app/](https://gilfond-devbublik.netlify.app/).
 
 ## Project Setup
 
