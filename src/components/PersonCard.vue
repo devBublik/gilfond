@@ -52,6 +52,10 @@ export default {
     }
   }
 
+  &__info {
+    padding: 8px;
+  }
+
   &__name {
     color: #333;
     font: normal 600 14px / 100% Montserrat;

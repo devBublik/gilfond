@@ -1,16 +1,15 @@
 <template>
   <div class="input">
-    <input type="text" :placeholder="placeholder" @input='$emit("onChange", $event.target.value)'/>
+    <input type="text" :placeholder="placeholder" @input="$emit('onChange', $event.target.value)" />
   </div>
 </template>
 
 <script>
-import { ref, defineEmits } from 'vue'
 export default {
   name: 'CustomInput',
   props: {
-    placeholder: String,
-  },
+    placeholder: String
+  }
 }
 </script>
 

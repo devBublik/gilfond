@@ -4,11 +4,9 @@
 </script>
 
 <template>
-  <div class="wrapper">
-    <main class="content">
-      <RouterView></RouterView>
-    </main>
-  </div>
+  <main class="content">
+    <RouterView></RouterView>
+  </main>
 </template>
 
 <script>

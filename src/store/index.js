@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { createStore } from 'vuex'
 import getPersons from '@/api'
 
@@ -27,6 +26,7 @@ export default createStore({
   actions: {
     async fetchPersons({ state, commit }) {
       const res = await getPersons()
+
       commit('setPersons', res.data)
     }
   },

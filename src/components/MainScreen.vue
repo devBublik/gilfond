@@ -32,7 +32,7 @@ import PersonInfoScreen from './RersonInfoScreen.vue'
 
 <script>
 import { useStore } from 'vuex'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed } from 'vue'
 import axios from 'axios'
 import Loader from './Loader.vue'
 export default {
@@ -52,12 +52,6 @@ export default {
       isLoading: false
     }
   },
-  watch: {
-    personOnScreen: {
-      deep: true
-    }
-  },
-
   methods: {
     async getPerson(id) {
       axios
@@ -79,7 +73,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import '../assets/styles/vars';
 .main-screen {
   min-height: 575px;
   height: 100%;
@@ -88,13 +83,26 @@ export default {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   display: flex;
 
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    min-height: auto;
+  }
+
   &__sidebar {
     width: 23%;
+
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
   }
   &__screen {
     padding: 30px 30px 24px 20px;
     width: 77%;
     border-left: 1px solid #e0e0e0;
+
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
 
     &--white {
       background: #fff;

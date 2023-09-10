@@ -28,9 +28,18 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '../assets/styles/vars';
 .person-info {
   display: flex;
   gap: 62px;
+
+  @media (max-width: $mobile) {
+    gap: 24px;
+  }
+
+  @media (max-width: $mobile-s) {
+    flex-direction: column;
+  }
 
   &__photo {
     max-width: 424px;
