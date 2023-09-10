@@ -3,7 +3,7 @@ import store from '../store'
 import router from '../router'
 
 const api = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com/users1',
+  baseURL: 'https://jsonplaceholder.typicode.com/users',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json'
