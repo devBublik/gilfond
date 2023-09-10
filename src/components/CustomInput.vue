@@ -1,6 +1,6 @@
 <template>
   <div class="input">
-    <input type="text" :placeholder="placeholder" :value="value" @change="$emit('fill', $event)" />
+    <input type="text" :placeholder="placeholder" @input='$emit("onChange", $event.target.value)'/>
   </div>
 </template>
 
@@ -8,24 +8,9 @@
 import { ref, defineEmits } from 'vue'
 export default {
   name: 'CustomInput',
-  emits: ['fill'],
   props: {
     placeholder: String,
-    value: String
   },
-
-  setup(_, { emit }) {
-    // const emit = defineEmits(['fill'])
-
-    const onChange = (e) => {
-      console.log(e.target.value)
-      emit('fill', e.target.value)
-    }
-
-    return {
-      onChange
-    }
-  }
 }
 </script>
 

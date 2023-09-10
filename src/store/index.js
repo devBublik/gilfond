@@ -1,33 +1,33 @@
+import axios from 'axios'
 import { createStore } from 'vuex'
+import getPersons from '@/api'
 
 export default createStore({
   state: () => ({
-    persons: []
+    persons: [],
+    error: null
   }),
 
   getters: {
     getPersons(state) {
       return state.persons
+    },
+    getError(state) {
+      return state.error
     }
   },
   mutations: {
     setPersons(state, persons) {
       state.persons = persons
+    },
+    setError(state, err) {
+      state.error = err
     }
   },
-
   actions: {
-    fetchPersons({ state, commit }) {
-      try {
-        fetch('https://jsonplaceholder.typicode.com/users').then((response) => {
-          if (response.ok) {
-            console.log(response.data)
-            commit('setPersons', response.data)
-          }
-        })
-      } catch (e) {
-        console.log('error')
-      }
+    async fetchPersons({ state, commit }) {
+      const res = await getPersons()
+      commit('setPersons', res.data)
     }
   },
   modules: {}

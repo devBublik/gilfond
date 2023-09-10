@@ -1,22 +1,19 @@
 <script setup>
-import MainScreen from './components/MainScreen.vue'
-import TheHeader from '@/components/TheHeader.vue'
+// import MainScreen from './components/MainScreen.vue'
+// import TheHeader from '@/components/TheHeader.vue'
 </script>
 
 <template>
   <div class="wrapper">
     <main class="content">
-      <TheHeader />
-      <MainScreen />
+      <RouterView></RouterView>
     </main>
-
-    <footer class="footer">{{ q }} footer</footer>
   </div>
 </template>
 
 <script>
-import { mapMutations, mapState, useStore } from 'vuex'
-import { computed, onMounted, ref } from 'vue'
+import { mapActions, mapMutations, mapState, useStore } from 'vuex'
+import { computed, ref } from 'vue'
 import axios from 'axios'
 export default {
   setup() {
@@ -31,17 +28,17 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setPersons'])
+    ...mapMutations(['setPersons']),
+    ...mapActions({
+      fetchPersons: 'fetchPersons'
+    })
   },
   computed: mapState({
     count: (state) => state.persons
   }),
   mounted() {
     console.log('mounted')
-    axios
-      .get('https://jsonplaceholder.typicode.com/users')
-      .then((res) => this.$store.commit('setPersons', res.data))
-      .then(() => console.log('state', this.persons))
+    this.fetchPersons()
   }
 }
 </script>
